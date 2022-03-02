@@ -34,3 +34,37 @@ class Solution:
             result -= union(n1,n2)
         
         return result
+
+    
+ ------------------------------------------------------------
+#DFS Solution
+
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        count = 0
+        adjList = defaultdict(list)
+        
+        for i,j in edges:
+            adjList[i].append(j)
+            adjList[j].append(i)
+        print(adjList)
+        
+        visited = set()
+        
+        def dfs(i):
+            visited.add(i)
+            for j in adjList[i]:
+                if j not in visited:
+                    dfs(j)
+                
+            
+        
+        
+        
+        
+        for i in range(n):
+            if i not in visited:
+                dfs(i)
+                count+=1
+        
+        return count
