@@ -19,3 +19,23 @@ class Solution:
                 else:
                     res +=1
         return res
+    
+    #more readable version, use a dict to store buckets of words, iterate over and append the remaining words
+ class Solution:
+    def numMatchingSubseq(self, s: str, words: List[str]) -> int:
+        di = defaultdict(list)
+        for word in words:
+            di[word[0]].append(word)
+        print(di)
+        res = 0
+        
+        for char in s:
+            words_expecting_char = di[char]
+            di[char] = []
+            for word in words_expecting_char:
+                if len(word) == 1:
+                    res+=1
+                else:
+                    di[word[1]].append(word[1:])
+            
+        return res
